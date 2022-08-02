@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/Home';
+import OrderDetails from './screens/OrderDetails';
+import PendingOrders from './screens/PendingOrders';
+import PickupDetails from './screens/PickupDetails';
+
+const Stack = createNativeStackNavigator();
+
+const theme = {
+  colors: {
+    background: '#FFFDFA',
+    card: '#FFFDFA',
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeScreen}
+        />
+        <Stack.Screen name="Pending Orders" component={PendingOrders} />
+        <Stack.Screen name="Order Details" component={OrderDetails} />
+        <Stack.Screen name="Pickup Details" component={PickupDetails} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
